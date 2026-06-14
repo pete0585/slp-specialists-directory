@@ -102,6 +102,6 @@ export const US_STATES: { abbr: string; name: string }[] = [
 ]
 
 export const PLAN_PRICES = {
-  verified: { amount: 9900, label: '$99/year', display: '$99', period: 'year' },
-  featured: { amount: 24900, label: '$249/year', display: '$249', period: 'year' },
+  verified: { amount: 7900, label: '$79/year', display: '$79', period: 'year' },
+  featured: { amount: 14900, label: '$149/year', display: '$149', period: 'year' },
 } as const
