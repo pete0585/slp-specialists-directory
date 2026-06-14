@@ -64,26 +64,26 @@ export default function ClaimPageClient({ listing, verified, upgraded, upgradedT
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="card p-6 border-2 border-sky-200">
             <div className="flex items-center gap-2 mb-3"><ShieldCheck className="h-5 w-5 text-sky-600" /><h3 className="font-serif text-lg font-bold text-slate-800">Verified</h3></div>
-            <p className="text-3xl font-bold text-sky-600 mb-1">$99<span className="text-base font-normal text-slate-500">/year</span></p>
+            <p className="text-3xl font-bold text-sky-600 mb-1">$79<span className="text-base font-normal text-slate-500">/year</span></p>
             <ul className="space-y-2 text-sm text-slate-600 mb-6 mt-4">
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-500 shrink-0" />Full bio + contact info visible</li>
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-500 shrink-0" />Up to 8 specialty badges</li>
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-500 shrink-0" />Insurance accepted list</li>
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-sky-500 shrink-0" />Priority in city search results</li>
             </ul>
-            <button onClick={() => handleUpgrade('verified')} disabled={loading} className="btn-secondary w-full">Get Verified — $99/yr</button>
+            <button onClick={() => handleUpgrade('verified')} disabled={loading} className="btn-secondary w-full">Get Verified — $79/yr</button>
           </div>
           <div className="card p-6 border-2 border-teal-200 relative">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-teal-500 px-3 py-0.5 text-xs font-semibold text-white">Most Visible</div>
             <div className="flex items-center gap-2 mb-3"><Star className="h-5 w-5 text-teal-600" /><h3 className="font-serif text-lg font-bold text-slate-800">Featured</h3></div>
-            <p className="text-3xl font-bold text-teal-600 mb-1">$249<span className="text-base font-normal text-slate-500">/year</span></p>
+            <p className="text-3xl font-bold text-teal-600 mb-1">$149<span className="text-base font-normal text-slate-500">/year</span></p>
             <ul className="space-y-2 text-sm text-slate-600 mb-6 mt-4">
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-teal-500 shrink-0" />Everything in Verified</li>
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-teal-500 shrink-0" />Top-3 placement in results</li>
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-teal-500 shrink-0" />"Featured SLP" badge on listing</li>
               <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-teal-500 shrink-0" />Highlighted on specialty pages</li>
             </ul>
-            <button onClick={() => handleUpgrade('featured')} disabled={loading} className="btn-teal w-full">Get Featured — $249/yr</button>
+            <button onClick={() => handleUpgrade('featured')} disabled={loading} className="btn-teal w-full">Get Featured — $149/yr</button>
           </div>
         </div>
       </div>
