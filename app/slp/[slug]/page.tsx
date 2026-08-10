@@ -31,14 +31,16 @@ export default async function SLPDetailPage({ params }: Props) {
   const displayName = getDisplayName(listing)
   const specialties = parseSpecialties(listing.specialties)
 
+  const isClaimed = listing.plan_tier !== 'free' && listing.plan_tier != null
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'MedicalBusiness',
     name: displayName,
     description: listing.bio ?? `Speech-language pathologist in ${listing.city}, ${listing.state}`,
     address: { '@type': 'PostalAddress', addressLocality: listing.city, addressRegion: listing.state, postalCode: listing.zip ?? '' },
-    telephone: listing.phone ?? undefined,
-    url: listing.website ?? undefined,
+    telephone: isClaimed ? (listing.phone ?? undefined) : undefined,
+    url: isClaimed ? (listing.website ?? undefined) : undefined,
     ...(listing.photo_url ? { image: listing.photo_url } : {}),
     knowsAbout: specialties,
     medicalSpecialty: 'Speech-Language Pathology',
