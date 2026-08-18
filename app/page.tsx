@@ -7,7 +7,7 @@ import { getFeaturedListings, getTotalListingCount } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Find a Speech-Language Pathologist Near You | FindSLPSpecialist.com',
-  description: 'Find a speech-language pathologist who specializes in exactly what you need — apraxia, autism/AAC, feeding therapy, aphasia, stuttering, and more. Free to search.',
+  description: 'Find a speech-language pathologist specializing in apraxia, autism/AAC, feeding therapy, aphasia, stuttering, and more. Free to search nationwide.',
 }
 
 const TOP_CITIES = [
