@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const { listingId, email } = await request.json()
     if (!listingId || !email) return NextResponse.json({ error: 'listingId and email are required' }, { status: 400 })
     const supabase = await createServiceClient()
-    const { data: listing, error: listingError } = await supabase.from('slp_specialists_listings').select('id, name, full_name, email, claimed').eq('id', listingId).single()
+    const { data: listing, error: listingError } = await supabase.from('slp_listings').select('id, name, full_name, email, claimed').eq('id', listingId).single()
     if (listingError || !listing) return NextResponse.json({ error: 'Listing not found' }, { status: 404 })
     if (listing.claimed) return NextResponse.json({ error: 'This listing has already been claimed' }, { status: 400 })
     const token = crypto.randomBytes(32).toString('hex')
