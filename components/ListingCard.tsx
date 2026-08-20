@@ -12,7 +12,7 @@ export default function ListingCard({ listing, featured = false }: { listing: Li
   const credentials = listing.credentials ?? []
 
   return (
-    <Link href={`/slp/${listing.slug}`} className={`card block p-5 group ${featured ? 'border-2 border-sky-200' : ''}`}>
+    <Link href={`/listings/${listing.slug}`} className={`card block p-5 group ${featured ? 'border-2 border-sky-200' : ''}`}>
       <div className="flex gap-4">
         <div className="shrink-0">
           {listing.photo_url ? (
