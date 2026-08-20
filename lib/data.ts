@@ -2,7 +2,7 @@ import { createClient } from './supabase/server'
 import { tierRank } from './utils'
 import type { Listing } from '@/types'
 
-const TABLE = 'slp_specialists_listings'
+const TABLE = 'slp_listings'
 
 function sortByTier(listings: Listing[]): Listing[] {
   return [...listings].sort((a, b) => tierRank(a.plan_tier) - tierRank(b.plan_tier))
