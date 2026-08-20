@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const { listingId, tier } = await request.json()
     if (!listingId || !['verified', 'featured'].includes(tier)) return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
     const supabase = await createServiceClient()
-    const { data: listing, error } = await supabase.from('slp_listings').select('id, name, full_name, email, claimed').eq('id', listingId).single()
+    const { data: listing, error } = await supabase.from('slp_listings').select('id, full_name, email').eq('id', listingId).single()
     if (error || !listing) return NextResponse.json({ error: 'Listing not found' }, { status: 404 })
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://findslpspecialist.com'
     const session = await createCheckoutSession({ listingId, planTier: tier, customerEmail: listing.email ?? undefined, successUrl: `${siteUrl}/claim/${listingId}?upgraded=true&tier=${tier}`, cancelUrl: `${siteUrl}/claim/${listingId}` })
