@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   if (claim.expires_at && new Date(claim.expires_at) < new Date()) return NextResponse.redirect(new URL('/?error=expired-token', request.url))
   await Promise.all([
     supabase.from('slp_claims').update({ verified: true, verified_at: new Date().toISOString() }).eq('id', claim.id),
-    supabase.from('slp_specialists_listings').update({ claimed: true, claimed_at: new Date().toISOString() }).eq('id', claim.listing_id),
+    supabase.from('slp_listings').update({ claimed: true, claimed_at: new Date().toISOString() }).eq('id', claim.listing_id),
   ])
   return NextResponse.redirect(new URL(`/claim/${claim.listing_id}?verified=true`, request.url))
 }
