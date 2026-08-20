@@ -12,7 +12,9 @@ export default async function ClaimPage({ params, searchParams }: Props) {
   const { id } = await params
   const sp = await searchParams
   const supabase = await createServiceClient()
-  const { data: listing } = await supabase.from('slp_specialists_listings').select('*').eq('id', id).single()
+  // Accept either UUID id or slug; also fix table name (was slp_specialists_listings)
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)
+  const { data: listing } = await supabase.from('slp_listings').select('*').eq(isUUID ? 'id' : 'slug', id).single()
   if (!listing) notFound()
   return <ClaimPageClient listing={listing} verified={sp.verified === 'true'} upgraded={sp.upgraded === 'true'} upgradedTier={sp.tier} />
 }
