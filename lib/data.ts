@@ -29,13 +29,13 @@ export async function getListings({
   if (city) query = query.ilike('city', city)
   if (specialty) query = query.ilike('specialties', `%${specialty}%`)
   if (insurance) query = query.contains('insurance_accepted', [insurance])
-  if (telehealth === true) query = query.eq('telehealth', true)
+  if (telehealth === true) query = query.eq('telehealth_available', true)
   if (acceptingNew === true) query = query.eq('accepting_new_clients', true)
   if (tier) query = query.eq('plan_tier', tier)
 
   const from = (page - 1) * pageSize
   const to = from + pageSize - 1
-  query = query.range(from, to).order('name', { ascending: true })
+  query = query.range(from, to).order('full_name', { ascending: true })
 
   const { data, count } = await query
   const listings = sortByTier(data ?? [])
@@ -48,7 +48,7 @@ export async function getFeaturedListings(limit = 6): Promise<Listing[]> {
     .not('is_active', 'is', false)
     .in('plan_tier', ['verified', 'featured'])
     .limit(limit)
-    .order('name', { ascending: true })
+    .order('full_name', { ascending: true })
   return sortByTier(data ?? [])
 }
 
@@ -57,7 +57,7 @@ export async function getListingsByCity(city: string, state: string, limit = 20)
   const { data } = await supabase.from(TABLE).select('*')
     .not('is_active', 'is', false)
     .ilike('city', city).ilike('state', state)
-    .limit(limit).order('name', { ascending: true })
+    .limit(limit).order('full_name', { ascending: true })
   return sortByTier(data ?? [])
 }
 
