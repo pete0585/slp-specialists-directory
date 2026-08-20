@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { MapPin, Phone, Globe, Video, CheckCircle, Star, ArrowLeft, ShieldCheck } from 'lucide-react'
+import { MapPin, ArrowLeft } from 'lucide-react'
 import { getListingBySlug } from '@/lib/data'
 import { getDisplayName, parseSpecialties, formatPhone } from '@/lib/utils'
 import ListingDetail from '@/components/ListingDetail'
