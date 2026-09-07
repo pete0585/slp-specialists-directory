@@ -3,12 +3,13 @@ import Link from 'next/link'
 import { ArrowRight, MapPin } from 'lucide-react'
 import ListingCard from '@/components/ListingCard'
 import { getListingsByCity } from '@/lib/data'
+import { cityPageUrl } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Find a Speech-Language Pathologist in Dallas, TX | SLP Specialist Directory',
   description:
     'Find speech-language pathologists in Dallas, TX. Browse SLPs specializing in pediatric language, stuttering, voice disorders, aphasia, dysphagia, and AAC across the Dallas metro.',
-  alternates: { canonical: 'https://www.slpspecialistdirectory.com/slp-specialists/dallas-tx' },
+  alternates: { canonical: cityPageUrl('dallas-tx') },
 }
 
 export const revalidate = 86400
