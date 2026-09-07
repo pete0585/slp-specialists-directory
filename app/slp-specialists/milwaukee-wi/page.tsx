@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
+import { cityPageUrl } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Best Speech-Language Pathologist in Milwaukee, WI | Speech-Language Pathologist Directory",
   description: "Find speech-language pathologist in Milwaukee, Wisconsin. 50+ listed. Filter by city and compare providers.",
+  alternates: { canonical: cityPageUrl("milwaukee-wi") },
 }
 
 async function getListings() {

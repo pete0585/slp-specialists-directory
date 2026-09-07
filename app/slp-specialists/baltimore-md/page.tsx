@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
+import { cityPageUrl } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Best Speech-Language Pathologist in Baltimore, MD | Speech-Language Pathologist Directory",
   description: "Find speech-language pathologist in Baltimore, Maryland. 45+ listed. Filter by city and compare providers.",
+  alternates: { canonical: cityPageUrl("baltimore-md") },
 }
 
 async function getListings() {
