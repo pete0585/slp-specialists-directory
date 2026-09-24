@@ -4,6 +4,7 @@ import { ShieldCheck, Search, Star, ArrowRight, Video, CheckCircle } from 'lucid
 import SearchBar from '@/components/SearchBar'
 import ListingCard from '@/components/ListingCard'
 import { getFeaturedListings, getTotalListingCount } from '@/lib/data'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 export const metadata: Metadata = {
   title: 'Find a Speech-Language Pathologist Near You | FindSLPSpecialist.com',
