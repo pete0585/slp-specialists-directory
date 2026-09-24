@@ -1,12 +1,52 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServiceClient } from '@/lib/supabase/server'
 
-export async function POST(request: NextRequest) {
+export const runtime = 'nodejs'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const NICHE = 'slp-specialists' as const
+const NEWSLETTER_NAME = 'The SLP Signal' as const
+const CONFIRM_URL_BASE = 'https://www.slpspecialistsdirectory.com/newsletter/confirm'
+const DASHBOARD_URL = 'https://aidam.thestrategicveteran.com'
+
+export async function POST(req: NextRequest) {
+  let email: string, first_name: string | undefined
   try {
-    const { email, specialty, city } = await request.json()
-    if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
-    const supabase = await createServiceClient()
-    await supabase.from('slp_subscribers').insert({ email, specialty, city, created_at: new Date().toISOString() }).onConflict('email').ignore()
+    const body = await req.json()
+    email = body.email
+    first_name = body.first_name
+  } catch {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+  }
+
+  if (!email || typeof email !== 'string' || !EMAIL_RE.test(email.trim())) {
+    return NextResponse.json({ error: 'Valid email address required' }, { status: 400 })
+  }
+
+  const token = process.env.NEWSLETTER_SUBMIT_TOKEN
+  if (!token) {
+    console.error('NEWSLETTER_SUBMIT_TOKEN not configured')
+    return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 })
+  }
+
+  try {
+    const res = await fetch(`${DASHBOARD_URL}/api/newsletter/submit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({
+        email: email.trim().toLowerCase(),
+        first_name: first_name?.trim() || undefined,
+        niche: NICHE,
+        newsletter_name: NEWSLETTER_NAME,
+        confirm_url_base: CONFIRM_URL_BASE,
+      }),
+    })
+    const data = await res.json()
+    if (!res.ok) {
+      return NextResponse.json({ error: data.error ?? 'Subscription failed' }, { status: res.status })
+    }
     return NextResponse.json({ success: true })
-  } catch { return NextResponse.json({ success: true }) }
+  } catch (e) {
+    console.error('Subscribe error:', e)
+    return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 })
+  }
 }
