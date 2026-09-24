@@ -52,11 +52,21 @@ export default async function HomePage() {
             <span>{listingCount > 0 ? `${listingCount.toLocaleString()} speech-language pathologists in the US` : 'The SLP directory that finds specialists, not just generalists'}</span>
           </div>
           <h1 className="font-serif text-4xl font-bold text-slate-800 leading-tight sm:text-5xl md:text-6xl text-balance">
-            Find an SLP who specializes in{' '}
-            <span className="text-sky-500">exactly what you need</span>
+            Find trusted speech-language pathologists near you
           </h1>
           <p className="mt-5 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Finding a speech therapist is easy. Finding one who specializes in childhood apraxia, autism/AAC, pediatric feeding, or aphasia is hard. We fix that.
+            Browse SLPs by specialty, age group served, and location — and connect directly. Free, always.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            Are you a SLP?{' '}
+            <a
+              href="https://studiozerohq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:opacity-80"
+            >
+              List your practice free →
+            </a>
           </p>
           <div className="mt-8 flex justify-center">
             <SearchBar size="large" />
