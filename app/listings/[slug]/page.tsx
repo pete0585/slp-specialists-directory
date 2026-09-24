@@ -49,6 +49,17 @@ export default async function SLPDetailPage({ params }: Props) {
 
       <ListingDetail listing={listing} />
 
+
+      {/* Studio Zero provider callout */}
+      <div className="mt-8 rounded-xl bg-gray-50 border border-gray-200 p-5">
+        <p className="text-sm text-gray-600">
+          <span className="font-semibold text-gray-800">Are you a provider listed here?</span>{' '}
+          <a href={`/claim/${listing.id}`} className="underline hover:opacity-80">Claim your free listing</a>
+          {' '}to add your contact details and bio.{' '}
+          <a href="https://studiozerohq.com" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">Studio Zero</a>
+          {' '}helps healthcare providers grow their practice with AI-powered marketing.
+        </p>
+      </div>
       {!listing.plan_tier || listing.plan_tier === 'free' ? (
         <div className="mt-8 rounded-2xl bg-sky-50 border border-sky-200 p-6 flex items-center justify-between gap-4">
           <div>
@@ -65,3 +76,4 @@ export default async function SLPDetailPage({ params }: Props) {
     </div>
   )
 }
+
