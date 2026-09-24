@@ -167,11 +167,10 @@ export default async function HomePage() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-serif text-3xl font-bold text-white mb-4">Are you a speech-language pathologist in private practice?</h2>
           <p className="text-sky-100 text-lg mb-8 leading-relaxed">
-            Get a free listing on the only nationwide directory built to capture specialty-specific searches. Verified listings start at $99/year — one new patient more than covers it.
-          </p>
+            Get a free listing on the only nationwide directory built to capture specialty-specific searches.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-sky-600 hover:bg-sky-50 transition-colors">Get Listed Free</Link>
-            <Link href="/submit#pricing" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/50 px-8 py-4 text-base font-semibold text-white hover:border-white transition-colors">View Pricing</Link>
+            
           </div>
         </div>
       </section>
