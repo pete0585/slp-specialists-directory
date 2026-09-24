@@ -101,7 +101,3 @@ export const US_STATES: { abbr: string; name: string }[] = [
   { abbr: 'WI', name: 'Wisconsin' }, { abbr: 'WY', name: 'Wyoming' }, { abbr: 'DC', name: 'District of Columbia' },
 ]
 
-export const PLAN_PRICES = {
-  verified: { amount: 7900, label: '$79/year', display: '$79', period: 'year' },
-  featured: { amount: 14900, label: '$149/year', display: '$149', period: 'year' },
-} as const

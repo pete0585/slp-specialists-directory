@@ -31,7 +31,6 @@ export async function getListings({
   if (insurance) query = query.contains('insurance_accepted', [insurance])
   if (telehealth === true) query = query.eq('telehealth_available', true)
   if (acceptingNew === true) query = query.eq('accepting_new_clients', true)
-  if (tier) query = query.eq('plan_tier', tier)
 
   const from = (page - 1) * pageSize
   const to = from + pageSize - 1
@@ -46,7 +45,6 @@ export async function getFeaturedListings(limit = 6): Promise<Listing[]> {
   const supabase = await createClient()
   const { data } = await supabase.from(TABLE).select('*')
     .not('is_active', 'is', false)
-    .in('plan_tier', ['verified', 'featured'])
     .limit(limit)
     .order('full_name', { ascending: true })
   return sortByTier(data ?? [])
