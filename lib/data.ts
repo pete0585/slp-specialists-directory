@@ -11,7 +11,11 @@ function sortByTier(listings: Listing[]): Listing[] {
 export async function getListingBySlug(slug: string): Promise<Listing | null> {
   const supabase = await createClient()
   const { data } = await supabase.from(TABLE).select('*').eq('slug', slug).single()
-  return data
+  if (!data) return null
+  // slp_listings uses website_url column; normalize to match shared Listing interface
+  const row = data as Record<string, unknown>
+  if (!row['website'] && row['website_url']) row['website'] = row['website_url']
+  return row as unknown as Listing
 }
 
 export async function getListings({
