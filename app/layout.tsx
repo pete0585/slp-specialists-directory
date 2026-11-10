@@ -1,3 +1,4 @@
+import DirectoryActions from '@/components/DirectoryActions'
 import EditorialLink from 'next/link'
 import type { Metadata } from 'next'
 import './globals.css'
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NewsletterFooterBar />
         <Analytics />
         <SpeedInsights />
+      <DirectoryActions />
       </body>
     </html>
   )

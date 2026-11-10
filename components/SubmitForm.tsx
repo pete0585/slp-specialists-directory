@@ -4,16 +4,20 @@ import { US_STATES, SLP_SPECIALTIES } from '@/types';
 export default function SubmitForm() {
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState('');
     const [form, setForm] = useState({ name: '', credentials: '', city: '', state: '', phone: '', email: '', website: '', bio: '', specialties: '', telehealth: false });
     const set = (field: string, value: string | boolean) => setForm(prev => ({ ...prev, [field]: value }));
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
+        setError('');
         try {
-            await fetch('/api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+            const res = await fetch('/api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+            const result = await res.json();
+            if (!res.ok || result.success !== true || result.status !== 'pending_review') throw new Error(result.error || 'We could not confirm your submission. Your entries are still here.');
             setSubmitted(true);
         }
-        catch { }
+        catch (err) { setError(err instanceof Error ? err.message : 'We could not confirm your submission. Your entries are still here.'); }
         finally {
             setLoading(false);
         }
@@ -22,7 +26,7 @@ export default function SubmitForm() {
         return (<div className="card p-8 text-center">
       <div className="text-4xl mb-4">✓</div>
       <h2 className="font-serif text-2xl font-bold text-slate-800 mb-2">Listing Submitted!</h2>
-      <p className="text-slate-600">We'll review your submission and activate your listing within 24 hours. You'll receive an email confirmation shortly.</p>
+      <p className="text-slate-600">Your submission is saved for review. It is not public yet. No email has been sent.</p>
     </div>);
     return (<form onSubmit={handleSubmit} className="card p-6 sm:p-8 space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -75,6 +79,7 @@ export default function SubmitForm() {
           </label>
         </div>
       </div>
+      {error && <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
       <button type="submit" disabled={loading} className="btn-primary w-full py-4">{loading ? 'Submitting…' : 'Submit My Listing (Free)'}</button>
       <p className="text-xs text-slate-500 text-center"> Listings are free. Public contact details are available without payment. </p>
     </form>);
