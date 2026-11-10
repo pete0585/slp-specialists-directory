@@ -62,7 +62,7 @@ export default function ListingDetail({ listing }: {
           <div className="space-y-3">
             {listing.phone && <a href={`tel:${listing.phone}`} className="flex items-center gap-3 text-slate-700 hover:text-sky-600 transition-colors"><Phone className="h-4 w-4 text-sky-400 shrink-0"/>{formatPhone(listing.phone)}</a>}
             {listing.email && <a href={`mailto:${listing.email}`} className="flex items-center gap-3 text-slate-700 hover:text-sky-600 transition-colors"><Mail className="h-4 w-4 text-sky-400 shrink-0"/>{listing.email}</a>}
-            {listing.website && <a href={listing.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-700 hover:text-sky-600 transition-colors"><Globe className="h-4 w-4 text-sky-400 shrink-0"/>{listing.website.replace(/^https?:\/\//, '')}</a>}
+            {listing.website && <a data-directory-action="website_click" href={listing.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-700 hover:text-sky-600 transition-colors"><Globe className="h-4 w-4 text-sky-400 shrink-0"/>{listing.website.replace(/^https?:\/\//, '')}</a>}
           </div>
         </div>)}
 
