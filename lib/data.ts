@@ -14,6 +14,8 @@ export async function getListingBySlug(slug: string): Promise<Listing | null> {
   if (!data) return null
   // slp_listings uses website_url column; normalize to match shared Listing interface
   const row = data as Record<string, unknown>
+  // The public profile consumes claimed; ownership remains checked against primary claim records.
+  row['claimed'] = row['is_claimed'] === true
   if (!row['website'] && row['website_url']) row['website'] = row['website_url']
   return row as unknown as Listing
 }
@@ -101,3 +103,4 @@ export async function getCitiesWithCounts(limit = 200): Promise<{ city: string; 
   })
   return Object.values(counts).sort((a, b) => b.count - a.count).slice(0, limit)
 }
+
