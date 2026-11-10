@@ -1,9 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export async function POST(request: NextRequest) {
-  const { password } = await request.json()
-  if (password !== process.env.ADMIN_PASSWORD) return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
-  const response = NextResponse.json({ success: true })
-  response.cookies.set('admin_auth', 'true', { httpOnly: true, secure: true, maxAge: 86400 * 7 })
-  return response
+// No trusted administrator mechanism is currently provisioned. Cookie presence
+// or client-supplied fields are never authority to mutate a directory listing.
+export async function POST() {
+  return NextResponse.json({ error: 'Administrator actions are unavailable until a validated administrator identity and role are configured.', code: 'administrator_access_not_configured' }, { status: 503, headers: { 'Cache-Control': 'no-store' } })
 }
